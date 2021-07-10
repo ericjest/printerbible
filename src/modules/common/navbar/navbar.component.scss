@@ -1,0 +1,22 @@
+.navbar {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 5rem;
+    border-bottom: 2px 3px 2px solid ghostwhite;
+    box-shadow: 3px 4px 1px #eeeeee;
+}
+
+.logo {
+    margin: 2rem;
+}
+
+.nav-items {
+    margin: 2rem;
+    margin-left: auto;
+}
+
+.nav-item {
+    margin-left: 4rem;
+}
