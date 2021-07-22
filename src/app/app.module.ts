@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from 'src/modules/common/footer/footer.component';
 import { NavbarComponent } from 'src/modules/common/navbar/navbar.component';
 
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     RouterModule.forRoot(
       appRoutes
     )

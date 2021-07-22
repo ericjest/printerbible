@@ -1,3 +1,8 @@
 <div class="home">
-    <p>home works!!!</p>
+    <select #bookSelect name="books" id="books" (change)="onChange(bookSelect.value)">
+        <option [value]="book" *ngFor="let book of books">{{ book }}</option>
+    </select>
+    <div class="bible-text">
+        {{ bookText }}
+    </div>
 </div>
