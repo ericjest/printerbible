@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   public books: string[] = [];
   public bookAbbreviations: string[] = [];
   public currentBook: string = 'Genesis';
-  public bookText: string = '';
+  public bookTextHTML: string = '';
   public activeBookAbbr: string = this._bookAbbreviatonPipe.transform('Genesis');
   public hoverActive = false;
 
@@ -37,8 +37,9 @@ export class HomeComponent implements OnInit {
       this.currentBook = this.books[0];
     });
 
-    this._http.get(`https://api.biblia.com/v1/bible/content/ASV.txt.json?passage=Genesis&key=` + environment.API_KEY).subscribe((bookTextObject: any) => {
-      this.bookText = bookTextObject.text;
+    this._http.get('https://api.biblia.com/v1/bible/content/ASV.html?passage=Genesis&style=fullyFormatted&key='
+        + environment.API_KEY, { responseType: 'text' }).subscribe((bookTextHTML: any) => {
+      this.bookTextHTML = bookTextHTML;
     });
   }
 
@@ -46,8 +47,9 @@ export class HomeComponent implements OnInit {
     this.hoverActive = false;
     this.currentBook = newBook;
     this.activeBookAbbr = this._bookAbbreviatonPipe.transform(this.currentBook);
-    this._http.get(`https://api.biblia.com/v1/bible/content/ASV.txt.json?passage=${this.currentBook}&key=` + environment.API_KEY).subscribe((bookTextObject: any) => {
-      this.bookText = bookTextObject.text;
+    this._http.get(`https://api.biblia.com/v1/bible/content/ASV.html?passage=${this.currentBook}&style=fullyFormatted&key=`
+        + environment.API_KEY, { responseType: 'text'}).subscribe((bookTextHTML: any) => {
+      this.bookTextHTML = bookTextHTML;
     });
   }
 
