@@ -1,6 +1,6 @@
 <div class="home-wrapper">
     <div class="home">
-        <div *ngIf="!mobileUser && displayOldTestament" class="books-list old-testament" [class.no-hover]="!hoverActive">
+        <div *ngIf="displayOldTestament" class="books-list old-testament" [class.no-hover]="!hoverActive">
             <div class="book-scroll">
                 <ul *ngFor="let book of oldTestamentBooks">
                     <div class="book-name" [class.no-hover]="!hoverActive" (click)="setBook(book)" (mouseenter)="mouseenter()">
@@ -10,7 +10,7 @@
                 </ul>
             </div>
         </div>
-        <div *ngIf="!mobileUser && !displayOldTestament" class="books-list new-testament" [class.no-hover]="!hoverActive">
+        <div *ngIf="!displayOldTestament" class="books-list new-testament" [class.no-hover]="!hoverActive">
             <div class="book-scroll">
                 <ul *ngFor="let book of newTestamentBooks">
                     <div class="book-name" [class.no-hover]="!hoverActive" (click)="setBook(book)" (mouseenter)="mouseenter()">
@@ -20,7 +20,7 @@
                 </ul>
             </div>
         </div>
-        <div class="main" [class.mobile-main-margin]="mobileUser">
+        <div class="main">
             <div class="bible-top-bar">
                 <span class="top-bar-item">
                     <label for="testament" id="testament-label">Testament:&nbsp;</label>
@@ -29,7 +29,7 @@
                         <option [selected]="!displayOldTestament">New Testament</option>
                     </select>
                 </span>
-                <span *ngIf="mobileUser" class="top-bar-item">
+                <span class="top-bar-item small-width-only">
                     <label for="books" id="books-label">Book:&nbsp;</label>
                     <select *ngIf="displayOldTestament" #bookSelection class="select-input" id="books" name="books" (change)="setBook(bookSelection.value)">
                         <option *ngFor="let book of oldTestamentBooks" [selected]="book.passage === currentBook.passage">

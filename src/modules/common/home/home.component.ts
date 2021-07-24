@@ -28,15 +28,12 @@ export class HomeComponent implements OnInit {
   public hoverActive = false;
   public currentChapter = 1;
 
-  public mobileUser = false;
-
   constructor(
     private _http: HttpClient,
     private _bookAbbreviatonPipe: BookAbbreviationPipe
   ) { }
 
   ngOnInit(): void {
-    this.mobileUser = typeof screen.orientation !== 'undefined';
     this._http.get('https://api.biblia.com/v1/bible/contents/ASV?key=' + environment.API_KEY).subscribe((booksObject: any) => {
       const books = booksObject.books.map((book: any) => {
         return <Book>{

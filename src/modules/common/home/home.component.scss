@@ -34,10 +34,6 @@
     min-height: 80vh;
 }
 
-.mobile-main-margin {
-    margin-left: 1.5rem;
-}
-
 ul {
     direction: ltr;
     padding-left: 1.5rem;
@@ -92,4 +88,22 @@ ul:hover {
 	font-size: 16px;
 	color: #444;
 	border: 1px solid #aaa;
+}
+
+.small-width-only {
+    display: none;
+}
+
+@media screen and (min-width: 0px) and (max-width: 400px) {
+    .books-list {
+        display: none;
+    }
+
+    .main {
+        margin-left: 1.5rem;
+    }
+
+    .small-width-only {
+        display: block;
+    }
 }
