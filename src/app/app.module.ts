@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from '../modules/common/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BookAbbreviationPipe } from 'src/modules/common/home/book-abbreviation.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    HomeComponent
+    HomeComponent,
+    BookAbbreviationPipe
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,7 @@ const appRoutes: Routes = [
       appRoutes
     )
   ],
-  providers: [],
+  providers: [BookAbbreviationPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,52 @@
 .home {
-    margin: 1rem 3.5rem 1rem 3.5rem;
+    display: grid;
+    grid-auto-flow: column;
+}
+
+.books-list {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    grid-area: 1 / 1 / 2 / 2;
+    max-width: 13rem;
+    z-index: 1;
+}
+
+.bible-text {
+    margin: 3rem 2rem 1rem 6rem;
+    font-size: 1.25rem;
+    grid-area: 1 / 1 / 4 / 2;
+    transition: color 0.5s;
+}
+
+ul {
+    padding-left: 1.5rem;
+}
+
+ul:hover {
+    text-shadow: 0.75px 1px rgb(158, 158, 158);
+}
+
+.light-book {
+    color: rgb(141, 141, 141);
+}
+
+.book-name {
+    cursor: pointer;
+}
+
+.book-name .book-full-name {
+    display: none;
+}
+
+.book-name:not(.no-hover):hover .book-full-name {
+    display: block;
+}
+
+.book-name:not(.no-hover):hover .book-abbr {
+    display: none;
+}
+
+.books-list:not(.no-hover):hover ~ .bible-text {
+    color: rgb(240, 240, 240);
+    transition: color 0.5s;
 }

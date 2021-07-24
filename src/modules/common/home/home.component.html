@@ -1,7 +1,12 @@
 <div class="home">
-    <select #bookSelect name="books" id="books" (change)="onChange(bookSelect.value)">
-        <option [value]="book" *ngFor="let book of books">{{ book }}</option>
-    </select>
+    <div class="books-list" [class.no-hover]="!hoverActive">
+        <ul *ngFor="let book of books">
+            <div class="book-name" [class.no-hover]="!hoverActive" (click)="onChange(book)" (mouseenter)="mouseenter()">
+                <span class="book-abbr" [class.light-book]="book !== currentBook">{{ book | abbreviateBook }}</span>
+                <span class="book-full-name">{{ book }}</span>
+            </div>
+        </ul>
+    </div>
     <div class="bible-text">
         {{ bookText }}
     </div>
