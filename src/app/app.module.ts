@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from '../modules/common/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BookAbbreviationPipe } from 'src/modules/common/home/book-abbreviation.pipe';
+import { IterateNumberPipe } from 'src/modules/common/home/iterate-number.pipe';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent }
@@ -20,7 +21,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    BookAbbreviationPipe
+    BookAbbreviationPipe,
+    IterateNumberPipe
   ],
   imports: [
     BrowserModule,

@@ -1,13 +1,57 @@
-<div class="home">
-    <div class="books-list" [class.no-hover]="!hoverActive">
-        <ul *ngFor="let book of books">
-            <div class="book-name" [class.no-hover]="!hoverActive" (click)="onChange(book)" (mouseenter)="mouseenter()">
-                <span class="book-abbr" [class.light-book]="book !== currentBook">{{ book | abbreviateBook }}</span>
-                <span class="book-full-name">{{ book }}</span>
+<div class="home-wrapper">
+    <div class="home">
+        <div *ngIf="!mobileUser && displayOldTestament" class="books-list old-testament" [class.no-hover]="!hoverActive">
+            <div class="book-scroll">
+                <ul *ngFor="let book of oldTestamentBooks">
+                    <div class="book-name" [class.no-hover]="!hoverActive" (click)="setBook(book)" (mouseenter)="mouseenter()">
+                        <span class="book-abbr" [class.light-book]="book.passage !== currentBook.passage">{{ book.passage | abbreviateBook }}</span>
+                        <span class="book-full-name">{{ book.passage }}</span>
+                    </div>
+                </ul>
             </div>
-        </ul>
-    </div>
-    <div class="bible-text">
-        {{ bookText }}
+        </div>
+        <div *ngIf="!mobileUser && !displayOldTestament" class="books-list new-testament" [class.no-hover]="!hoverActive">
+            <div class="book-scroll">
+                <ul *ngFor="let book of newTestamentBooks">
+                    <div class="book-name" [class.no-hover]="!hoverActive" (click)="setBook(book)" (mouseenter)="mouseenter()">
+                        <span class="book-abbr" [class.light-book]="book.passage !== currentBook.passage">{{ book.passage | abbreviateBook }}</span>
+                        <span class="book-full-name">{{ book.passage }}</span>
+                    </div>
+                </ul>
+            </div>
+        </div>
+        <div class="main" [class.mobile-main-margin]="mobileUser">
+            <div class="bible-top-bar">
+                <span class="top-bar-item">
+                    <label for="testament" id="testament-label">Testament:&nbsp;</label>
+                    <select #testamentSelection class="select-input" id="testament" name="testament" (change)="setTestament(testamentSelection.value)">
+                        <option [selected]="displayOldTestament">Old Testament</option>
+                        <option [selected]="!displayOldTestament">New Testament</option>
+                    </select>
+                </span>
+                <span *ngIf="mobileUser" class="top-bar-item">
+                    <label for="books" id="books-label">Book:&nbsp;</label>
+                    <select *ngIf="displayOldTestament" #bookSelection class="select-input" id="books" name="books" (change)="setBook(bookSelection.value)">
+                        <option *ngFor="let book of oldTestamentBooks" [selected]="book.passage === currentBook.passage">
+                            {{ book.passage }}
+                        </option>
+                    </select>
+                    <select *ngIf="!displayOldTestament" #bookSelection class="select-input" id="books" name="books" (change)="setBook(bookSelection.value)">
+                        <option *ngFor="let book of newTestamentBooks" [selected]="book.passage === currentBook.passage">
+                            {{ book.passage }}
+                        </option>
+                    </select>
+                </span>
+                <span class="top-bar-item">
+                    <label for="chapter" id="chapter-label">Chapter:&nbsp;</label>
+                    <select #chapterSelection class="select-input" id="chapter" name="chapter" (change)="setChapter(chapterSelection.value)">
+                        <option *ngFor="let chapter of currentBook.chapterCount | iterateNumber" [selected]="chapter === currentChapter">
+                            {{ chapter }}
+                        </option>
+                    </select>
+                </span>
+            </div>
+            <div class="bible-text" [innerHTML]="bookTextHTML"></div>
+        </div>
     </div>
 </div>

@@ -1,9 +1,18 @@
+.home-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .home {
     display: grid;
     grid-auto-flow: column;
+    width: 60rem;
 }
 
 .books-list {
+    height: 90vh;
+    position: fixed;
+    margin-top: 5.25rem;
     font-size: 1.5rem;
     margin-left: 0.5rem;
     grid-area: 1 / 1 / 2 / 2;
@@ -11,15 +20,29 @@
     z-index: 1;
 }
 
-.bible-text {
-    margin: 3rem 2rem 1rem 6rem;
+.book-scroll {
+    height: 90vh;
+    direction: rtl;
+    overflow-y: scroll;
+}
+
+.main {
+    margin: 8rem 2rem 1rem 7rem;
     font-size: 1.25rem;
     grid-area: 1 / 1 / 4 / 2;
     transition: color 0.5s;
+    min-height: 80vh;
+}
+
+.mobile-main-margin {
+    margin-left: 1.5rem;
 }
 
 ul {
+    direction: ltr;
     padding-left: 1.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
 }
 
 ul:hover {
@@ -46,7 +69,27 @@ ul:hover {
     display: none;
 }
 
-.books-list:not(.no-hover):hover ~ .bible-text {
+.books-list:not(.no-hover):hover ~ .main {
     color: rgb(240, 240, 240);
     transition: color 0.5s;
+}
+
+.bible-top-bar {
+    max-width: 100vw;
+    margin-bottom: 2.5rem;
+}
+
+.top-bar-item {
+    display: inline-flex;
+    flex-direction: row;
+    margin-right: 2rem;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.select-input {
+	display: block;
+	font-size: 16px;
+	color: #444;
+	border: 1px solid #aaa;
 }

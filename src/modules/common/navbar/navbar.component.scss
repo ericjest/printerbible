@@ -1,4 +1,5 @@
 .navbar {
+    position: fixed;
     width: 100%;
     display: inline-flex;
     align-items: center;
@@ -6,8 +7,10 @@
     height: 5rem;
     border-bottom: 2px 3px 2px solid ghostwhite;
     box-shadow: 3px 4px 1px #eeeeee;
+    background-color: white;
 }
 
 .logo {
     margin: 2rem;
+    font-size: 2rem;
 }
