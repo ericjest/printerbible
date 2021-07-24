@@ -1,21 +1,23 @@
-<div class="home">
-    <div class="books-list" [class.no-hover]="!hoverActive">
-        <ul *ngFor="let book of books">
-            <div class="book-name" [class.no-hover]="!hoverActive" (click)="setBook(book)" (mouseenter)="mouseenter()">
-                <span class="book-abbr" [class.light-book]="book.passage !== currentBook.passage">{{ book.passage | abbreviateBook }}</span>
-                <span class="book-full-name">{{ book.passage }}</span>
-            </div>
-        </ul>
-    </div>
-    <div class="main">
-        <div class="bible-top-bar">
-            <span id="chapter-text">Chapter:&nbsp;</span>
-            <select #chapterSelection id="chapter" name="chapter" (change)="setChapter(chapterSelection.value)">
-                <option *ngFor="let chapter of currentBook.chapterCount | iterateNumber" [selected]="chapter === currentChapter">
-                    {{ chapter }}
-                </option>
-            </select>
+<div class="home-wrapper">
+    <div class="home">
+        <div class="books-list" [class.no-hover]="!hoverActive">
+            <ul *ngFor="let book of books">
+                <div class="book-name" [class.no-hover]="!hoverActive" (click)="setBook(book)" (mouseenter)="mouseenter()">
+                    <span class="book-abbr" [class.light-book]="book.passage !== currentBook.passage">{{ book.passage | abbreviateBook }}</span>
+                    <span class="book-full-name">{{ book.passage }}</span>
+                </div>
+            </ul>
         </div>
-        <div class="bible-text" [innerHTML]="bookTextHTML"></div>
+        <div class="main">
+            <div class="bible-top-bar">
+                <span id="chapter-text">Chapter:&nbsp;</span>
+                <select #chapterSelection id="chapter" name="chapter" (change)="setChapter(chapterSelection.value)">
+                    <option *ngFor="let chapter of currentBook.chapterCount | iterateNumber" [selected]="chapter === currentChapter">
+                        {{ chapter }}
+                    </option>
+                </select>
+            </div>
+            <div class="bible-text" [innerHTML]="bookTextHTML"></div>
+        </div>
     </div>
 </div>

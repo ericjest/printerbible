@@ -1,6 +1,12 @@
+.home-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .home {
     display: grid;
     grid-auto-flow: column;
+    width: 60rem;
 }
 
 .books-list {
