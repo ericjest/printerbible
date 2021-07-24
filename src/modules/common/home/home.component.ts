@@ -8,8 +8,8 @@ interface Chapter {
 }
 
 interface Book {
-  bookPassage: string;
-  chapters?: Chapter[]  
+  passage: string;
+  chapterCount: number  
 }
 
 @Component({
@@ -18,12 +18,13 @@ interface Book {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  public books: string[] = [];
+  public books: Book[] = [];
   public bookAbbreviations: string[] = [];
-  public currentBook: string = 'Genesis';
+  public currentBook: Book = <Book>{ passage: 'Genesis', chapterCount: 50 };
   public bookTextHTML: string = '';
   public activeBookAbbr: string = this._bookAbbreviatonPipe.transform('Genesis');
   public hoverActive = false;
+  public currentChapter = 1;
 
   constructor(
     private _http: HttpClient,
@@ -32,29 +33,44 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this._http.get('https://api.biblia.com/v1/bible/contents/ASV?key=' + environment.API_KEY).subscribe((booksObject: any) => {
-      this.books = booksObject.books.map((book: any) => book.passage);
-      this.bookAbbreviations = this.books.map((book: string) => this._bookAbbreviatonPipe.transform(book));
-      this.currentBook = this.books[0];
+      this.books = booksObject.books.map((book: any) => {
+        return <Book>{
+          passage: book.passage,
+          chapterCount: book.chapters.length
+        };
+      });
+      this.bookAbbreviations = this.books.map((book: Book) => this._bookAbbreviatonPipe.transform(book.passage));
+      this.currentBook = <Book>{ passage: this.books[0].passage, chapterCount: this.books[0].chapterCount };
     });
 
-    this._http.get('https://api.biblia.com/v1/bible/content/ASV.html?passage=Genesis&style=fullyFormatted&key='
+    this._http.get('https://api.biblia.com/v1/bible/content/ASV.html?passage=Genesis1&style=fullyFormatted&key='
         + environment.API_KEY, { responseType: 'text' }).subscribe((bookTextHTML: any) => {
       this.bookTextHTML = bookTextHTML;
     });
   }
 
-  onChange(newBook: string) {
+  setBook(newBook: Book) {
     this.hoverActive = false;
     this.currentBook = newBook;
-    this.activeBookAbbr = this._bookAbbreviatonPipe.transform(this.currentBook);
-    this._http.get(`https://api.biblia.com/v1/bible/content/ASV.html?passage=${this.currentBook}&style=fullyFormatted&key=`
-        + environment.API_KEY, { responseType: 'text'}).subscribe((bookTextHTML: any) => {
-      this.bookTextHTML = bookTextHTML;
-    });
+    this.currentChapter = 1;
+    this.activeBookAbbr = this._bookAbbreviatonPipe.transform(this.currentBook.passage);
+    this._getBibleChapter(this.currentBook.passage, this.currentChapter);
+  }
+
+  setChapter(chapterSelection: string) {
+    this.currentChapter = parseInt(chapterSelection, 10);
+    this._getBibleChapter(this.currentBook.passage, this.currentChapter);
   }
 
   mouseenter() {
     this.hoverActive = true;
+  }
+
+  private _getBibleChapter(bookPassage: string, chapter: number) {
+    this._http.get(`https://api.biblia.com/v1/bible/content/ASV.html?passage=${bookPassage}${chapter}&style=fullyFormatted&key=`
+        + environment.API_KEY, { responseType: 'text'}).subscribe((bookTextHTML: any) => {
+      this.bookTextHTML = bookTextHTML;
+    });
   }
 
 }
