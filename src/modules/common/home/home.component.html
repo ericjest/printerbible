@@ -11,7 +11,7 @@
         <div class="main">
             <div class="bible-top-bar">
                 <span id="chapter-text">Chapter:&nbsp;</span>
-                <select #chapterSelection id="chapter" name="chapter" (change)="setChapter(chapterSelection.value)">
+                <select #chapterSelection class="select-input" id="chapter" name="chapter" (change)="setChapter(chapterSelection.value)">
                     <option *ngFor="let chapter of currentBook.chapterCount | iterateNumber" [selected]="chapter === currentChapter">
                         {{ chapter }}
                     </option>
